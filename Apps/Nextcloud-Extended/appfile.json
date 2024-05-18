@@ -1,0 +1,39 @@
+{
+  "version": "2.0",
+  "title": "Nextcloud-Extended",
+  "name": "nextcloud-extended",
+  "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/icon.png",
+  "tagline": "The productivity platform that keeps you in control",
+  "overview": "Nextcloud puts your data at your fingertips, under your control. Store your documents, calendar, contacts and photos on a server at home, at one of our providers or in a data center you trust.\nExtended with Hardware Transcoder (https://memories.gallery/hw-transcoding/) & all docker mods from https://mods.linuxserver.io/?mod=nextcloud",
+  "thumbnail": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/thumbnail.jpg",
+  "screenshots": [
+    "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/screenshot-1.png",
+    "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/screenshot-2.png",
+    "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/screenshot-3.png"
+  ],
+  "category": ["Cloud"],
+  "developer": {
+    "name": "Linuxserver/Nextcloud",
+    "website": "https://docs.linuxserver.io/images/docker-nextcloud",
+    "donate_text": "",
+    "donate_link": "https://www.linuxserver.io/donate"
+  },
+  "adaptor": {
+    "name": "MRDGH2821",
+    "website": "https://linktr.ee/mrdgh2821",
+    "donate_text": "",
+    "donate_link": "https://linktr.ee/mrdgh2821"
+  },
+  "abilities": {
+    "notification": false,
+    "widgets": false,
+    "authentication": false,
+    "search": false,
+    "upnp": false
+  },
+  "tips": {},
+  "changelog": {
+    "latest_updates": "",
+    "url": "https://github.com/linuxserver/docker-nextcloud/releases"
+  }
+}
