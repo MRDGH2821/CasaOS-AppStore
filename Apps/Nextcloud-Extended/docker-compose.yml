@@ -103,7 +103,7 @@ services:
   nextcloud-valkey:
     container_name: nextcloud-valkey
     hostname: valkey
-    image: valkey/valkey:7.2.4
+    image: valkey/valkey:7.2.5
     labels:
       icon: https://valkey.io/assets/img/Valkey-logo.svg
     network_mode: bridge
