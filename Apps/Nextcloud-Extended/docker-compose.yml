@@ -57,6 +57,28 @@ services:
         - container: /var/www/data
           description:
             en_us: Nextcloud data directory.
+  nextcloud-go-vod:
+    container_name: go-vod
+    depends_on:
+      - nextcloud
+    devices:
+      - /dev/dri:/dev/dri # VA-API (omit for NVENC)
+      - /dev/vcsm:/dev/vcsm
+      - /dev/vchiq:/dev/vchiq
+      - /dev/video10:/dev/video10
+      - /dev/video11:/dev/video11
+      - /dev/video12:/dev/video12
+    environment:
+      - NEXTCLOUD_HOST=nextcloud
+      - NVIDIA_VISIBLE_DEVICES=all
+    image: radialapps/go-vod:0.2.5
+    init: true
+    restart: always
+    volumes:
+      - read_only: true
+        source: /DATA/AppData/nextcloud-extended/var/www/html
+        target: /var/www/html
+        type: bind
   nextcloud-postgresql:
     container_name: postgresql
     environment:
@@ -98,27 +120,6 @@ services:
       - source: /DATA/AppData/valkey/config
         target: /usr/local/etc/valkey
         type: bind
-  go-vod:
-    image: radialapps/go-vod
-    restart: always
-    init: true
-    depends_on:
-      - nextcloud
-    environment:
-      - NEXTCLOUD_HOST=nextcloud
-      - NVIDIA_VISIBLE_DEVICES=all
-    devices:
-      - /dev/dri:/dev/dri # VA-API (omit for NVENC)
-      - /dev/vcsm:/dev/vcsm
-      - /dev/vchiq:/dev/vchiq
-      - /dev/video10:/dev/video10
-      - /dev/video11:/dev/video11
-      - /dev/video12:/dev/video12
-    volumes:
-      - source: /DATA/AppData/nextcloud-extended/var/www/html
-        target: /var/www/html
-        type: bind
-        read_only: true
 x-casaos:
   architectures:
     - amd64
@@ -134,9 +135,10 @@ x-casaos:
     en_us:
       Nextcloud puts your data at your fingertips, under your control. Store
       your documents, calendar, contacts and photos on a server at home, at one
-      of our providers or in a data center you trust. Extended with PostgreSQL, Valkey, Hardware
-      Transcoder (https://memories.gallery/hw-transcoding/) and MediaC +
-      Memories docker mods from https://mods.linuxserver.io/?mod=nextcloud
+      of our providers or in a data center you trust. Extended with PostgreSQL,
+      Valkey, Hardware Transcoder (https://memories.gallery/hw-transcoding/) and
+      MediaC + Memories docker mods from
+      https://mods.linuxserver.io/?mod=nextcloud
   developer: Nextcloud
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/icon.png
   index: /
