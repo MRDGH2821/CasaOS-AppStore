@@ -1,4 +1,4 @@
-name: nextcloud
+name: nextcloud-extended
 services:
   nextcloud:
     container_name: nextcloud
