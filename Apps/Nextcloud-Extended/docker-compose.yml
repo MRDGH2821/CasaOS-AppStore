@@ -1,0 +1,154 @@
+name: nextcloud
+services:
+  nextcloud:
+    container_name: nextcloud
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/vcsm:/dev/vcsm
+      - /dev/vchiq:/dev/vchiq
+      - /dev/video10:/dev/video10
+      - /dev/video11:/dev/video11
+      - /dev/video12:/dev/video12
+    environment:
+      - NEXTCLOUD_TRUSTED_DOMAINS=
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_HOST=postgresql
+      - POSTGRES_PASSWORD=nextcloud
+      - POSTGRES_USER=nextcloud
+      - REDIS_HOST=valkey
+      - REDIS_HOST_PORT=6379
+      - PGID=$PGID
+      - PUID=$PUID
+      - TZ=$TZ
+      - DOCKER_MODS=linuxserver/mods:nextcloud-memories|linuxserver/mods:nextcloud-mediadc|linuxserver/mods:universal-package-install
+      - INSTALL_PACKAGES=libva|libva-intel-driver|intel-media-driver|mesa-va-gallium
+    image: nextcloud:29.0.0
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        published: "10080"
+        target: 80
+      - protocol: tcp
+        published: "10443"
+        target: 443
+    restart: unless-stopped
+    volumes:
+      - source: /DATA/AppData/nextcloud-extended/var/www/html
+        target: /var/www/html
+        type: bind
+      - source: /DATA/nextcloud-extended/data
+        target: /var/www/data
+        type: bind
+    x-casaos:
+      ports:
+        - container: "80"
+          description:
+            en_us: WebUI HTTP Port
+            zh_cn: WebUI HTTP 端口
+        - container: "443"
+          description:
+            en_us: WebUI HTTPS Port
+            zh_cn: WebUI HTTPS 端口
+      volumes:
+        - container: /var/www/html
+          description:
+            en_us: Nextcloud config directory.
+            zh_cn: Nextcloud 配置目录。
+        - container: /var/www/data
+          description:
+            en_us: Nextcloud data directory.
+  nextcloud-postgresql:
+    container_name: postgresql
+    environment:
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_PASSWORD=nextcloud
+      - POSTGRES_USER=nextcloud
+      - TZ=$TZ
+    hostname: postgresql
+    image: postgres:15.3
+    labels:
+      icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PostgreSQL/icon.png
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        published: "5432"
+        target: 5432
+    restart: unless-stopped
+    volumes:
+      - source: /DATA/AppData/postgresql/data
+        target: /var/lib/postgresql/data
+        type: bind
+  nextcloud-valkey:
+    container_name: nextcloud-valkey
+    hostname: valkey
+    image: valkey/valkey:7.2.4
+    labels:
+      icon: https://valkey.io/assets/img/Valkey-logo.svg
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        published: "6379"
+        target: 6379
+    privileged: false
+    restart: unless-stopped
+    volumes:
+      - source: /DATA/AppData/valkey/data
+        target: /data
+        type: bind
+      - source: /DATA/AppData/valkey/config
+        target: /usr/local/etc/valkey
+        type: bind
+  go-vod:
+    image: radialapps/go-vod
+    restart: always
+    init: true
+    depends_on:
+      - nextcloud
+    environment:
+      - NEXTCLOUD_HOST=nextcloud
+      - NVIDIA_VISIBLE_DEVICES=all
+    devices:
+      - /dev/dri:/dev/dri # VA-API (omit for NVENC)
+      - /dev/vcsm:/dev/vcsm
+      - /dev/vchiq:/dev/vchiq
+      - /dev/video10:/dev/video10
+      - /dev/video11:/dev/video11
+      - /dev/video12:/dev/video12
+    volumes:
+      - source: /DATA/AppData/nextcloud-extended/var/www/html
+        target: /var/www/html
+        type: bind
+        read_only: true
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+    - "386"
+    - mips64le
+    - ppc64le
+    - s390x
+  author: MRDGH2821
+  category: Cloud
+  description:
+    en_us:
+      Nextcloud puts your data at your fingertips, under your control. Store
+      your documents, calendar, contacts and photos on a server at home, at one
+      of our providers or in a data center you trust. Extended with Hardware
+      Transcoder (https://memories.gallery/hw-transcoding/) and MediaC &
+      Memories docker mods from https://mods.linuxserver.io/?mod=nextcloud
+  developer: Nextcloud
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/icon.png
+  index: /
+  main: nextcloud
+  port_map: "10080"
+  screenshot_link:
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/screenshot-1.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/screenshot-2.png
+    - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/screenshot-3.png
+  tagline:
+    en_us: The productivity platform that keeps you in control
+  thumbnail: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/thumbnail.jpg
+  tips: {}
+  title:
+    en_us: Nextcloud-Extended
