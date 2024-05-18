@@ -140,7 +140,7 @@ x-casaos:
   developer: Nextcloud
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/icon.png
   index: /
-  main: nextcloud
+  main: nextcloud-extended
   port_map: "10080"
   screenshot_link:
     - https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/screenshot-1.png
