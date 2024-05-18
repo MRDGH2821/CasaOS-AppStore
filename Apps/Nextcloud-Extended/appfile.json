@@ -4,7 +4,7 @@
   "name": "nextcloud-extended",
   "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/icon.png",
   "tagline": "The productivity platform that keeps you in control",
-  "overview": "Nextcloud puts your data at your fingertips, under your control. Store your documents, calendar, contacts and photos on a server at home, at one of our providers or in a data center you trust.\nExtended with Hardware Transcoder (https://memories.gallery/hw-transcoding/) & all docker mods from https://mods.linuxserver.io/?mod=nextcloud",
+  "overview": "Nextcloud puts your data at your fingertips, under your control. Store your documents, calendar, contacts and photos on a server at home, at one of our providers or in a data center you trust.\nExtended with PostgreSQL, Valkey, Hardware Transcoder (https://memories.gallery/hw-transcoding/) and MediaC + Memories docker mods from https://mods.linuxserver.io/?mod=nextcloud",
   "thumbnail": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/thumbnail.jpg",
   "screenshots": [
     "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/screenshot-1.png",

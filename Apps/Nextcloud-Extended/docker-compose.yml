@@ -134,8 +134,8 @@ x-casaos:
     en_us:
       Nextcloud puts your data at your fingertips, under your control. Store
       your documents, calendar, contacts and photos on a server at home, at one
-      of our providers or in a data center you trust. Extended with Hardware
-      Transcoder (https://memories.gallery/hw-transcoding/) and MediaC &
+      of our providers or in a data center you trust. Extended with PostgreSQL, Valkey, Hardware
+      Transcoder (https://memories.gallery/hw-transcoding/) and MediaC +
       Memories docker mods from https://mods.linuxserver.io/?mod=nextcloud
   developer: Nextcloud
   icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/icon.png
